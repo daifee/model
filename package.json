@@ -4,8 +4,8 @@
   "description": "将数据模型化",
   "main": "./lib/index.js",
   "scripts": {
-    "test": "NODE_ENV=test mocha -t 10000 -r ./test/setup.js --recursive ./test",
-    "test-debug": "NODE_ENV=test mocha --debug -t 10000 -r ./test/setup.js --recursive ./test"
+    "test": "mocha --compilers js:babel-register -r ./test/setup.js --recursive ./test",
+    "test-debug": "mocha --compilers js:babel-register --debug -r ./test/setup.js --recursive ./test"
   },
   "repository": {
     "type": "git",
@@ -24,6 +24,8 @@
   },
   "homepage": "https://github.com/daifee/model#readme",
   "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.6.0",
     "chai": "^4.1.2",
     "mocha": "^3.5.3"
   }
