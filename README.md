@@ -1,6 +1,43 @@
 # model
 将数据模型化
 
+
+
+## 用例
+
+```js
+import { define, create, Types } from 'model';
+
+const { String, Number } = Types;
+
+// 定义模式
+let schema = define({
+  name: {
+    type: String
+  },
+  age: {
+    type: Number,
+    default: 0
+  }
+});
+
+// 创建模型
+let User = create(schema);
+
+
+// 创建对象
+let user = new User({
+  name: 'daifee',
+  age: 27
+});
+
+// 读取属性
+console.log(user.get('name'));
+// 修改属性
+user.set('age', 28);
+```
+
+
 核心概念：
 
 * 数据类型：
