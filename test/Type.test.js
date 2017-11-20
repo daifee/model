@@ -2,6 +2,16 @@ import Type from '../lib/Type';
 
 
 describe('lib/Type.js', function () {
+
+  it('isUndefined(value)接口', function () {
+    let data = [null, 0, {}, '', true, false];
+    data.forEach(function (value) {
+      expect(Type.isUndefined(value)).to.deep.equal(false);
+    });
+
+    expect(Type.isUndefined(undefined)).to.deep.equal(true);
+  });
+
   it('创建第一个Type实例', function () {
     let type = new Type('test', {
       default: 'daifee',
