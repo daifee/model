@@ -5,7 +5,7 @@
   "main": "./lib/index.js",
   "scripts": {
     "test": "mocha --compilers js:babel-register -r ./test/setup.js --recursive ./test",
-    "test-debug": "mocha --compilers js:babel-register --debug -r ./test/setup.js --recursive ./test"
+    "test-debug": "mocha --compilers js:babel-register --inspect-brk -r ./test/setup.js --recursive ./test"
   },
   "repository": {
     "type": "git",
@@ -25,7 +25,7 @@
   "homepage": "https://github.com/daifee/model#readme",
   "devDependencies": {
     "babel-cli": "^6.26.0",
-    "babel-preset-env": "^1.6.0",
+    "babel-preset-env": "^1.6.1",
     "chai": "^4.1.2",
     "mocha": "^3.5.3"
   }
