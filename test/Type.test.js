@@ -86,6 +86,8 @@ describe('lib/Type.js', function () {
 
     // 没通过验证，返回message
     expect(err).to.be.an.instanceof(Error);
+    expect(err.attr).to.equal('test');
+    expect(err.value).to.deep.equal(undefined);
     expect(err.name).to.deep.equal('ValidatorError');
     // 通过验证，返回true
     expect(type.applyValidations(null, true)).to.deep.equal(true);
@@ -113,6 +115,8 @@ describe('lib/Type.js', function () {
 
     // 没通过验证，返回message
     expect(err).to.be.an.instanceof(Error);
+    expect(err.attr).to.equal('test');
+    expect(err.value).to.deep.equal(undefined);
     expect(err.name).to.deep.equal('ValidatorError');
     // 通过验证，返回true
     expect(type.applyValidations(obj, true)).to.deep.equal(true);
