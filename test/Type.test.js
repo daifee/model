@@ -76,11 +76,19 @@ describe('lib/Type.js', function () {
 
   it('options.required', function () {
     let type = new Type('test', {required: 'fail'});
+    let err;
+    try {
+      type.applyValidations(null, undefined);
+    } catch (e) {
+      err = e;
+    }
+
 
     // 没通过验证，返回message
-    expect(type.applyValidations(null, undefined)).to.deep.equal('fail');
-    // 通过验证，返回undefined
-    expect(type.applyValidations(null, true)).to.deep.equal(undefined);
+    expect(err).to.be.an.instanceof(Error);
+    expect(err.name).to.deep.equal('ValidatorError');
+    // 通过验证，返回true
+    expect(type.applyValidations(null, true)).to.deep.equal(true);
   });
 
   it('options.validator', function () {
@@ -95,9 +103,18 @@ describe('lib/Type.js', function () {
       }
     });
 
+    let err;
+    try {
+      type.applyValidations(obj, undefined);
+    } catch (e) {
+      err = e;
+    }
+
+
     // 没通过验证，返回message
-    expect(type.applyValidations(obj, undefined)).to.deep.equal('fail');
-    // 通过验证，返回undefined
-    expect(type.applyValidations(obj, true)).to.deep.equal(undefined);
+    expect(err).to.be.an.instanceof(Error);
+    expect(err.name).to.deep.equal('ValidatorError');
+    // 通过验证，返回true
+    expect(type.applyValidations(obj, true)).to.deep.equal(true);
   });
 });
