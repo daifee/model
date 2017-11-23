@@ -32,8 +32,6 @@ describe('lib/Type.js', function () {
 
     // default, get, cast 都是getter
     expect(type._getters.length).to.deep.equal(3);
-    // cast必须在最后
-    expect(type._getters[2]).to.deep.equal(type.cast);
 
     // set
     expect(type._setters.length).to.deep.equal(1);

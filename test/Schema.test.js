@@ -4,7 +4,7 @@ import NumberType from '../lib/types/Number';
 import StringType from '../lib/types/String';
 
 
-describe.only('lib/Schema', function () {
+describe('lib/Schema', function () {
   it('定义一个Schema对象', function () {
     let schema = define({
       name: {
