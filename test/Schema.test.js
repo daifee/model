@@ -136,5 +136,101 @@ describe('lib/Schema', function () {
     expect(err).to.be.an.instanceof(Error);
     expect(err.name).to.deep.equal('CastError');
   });
+
+
+  describe('.validate(context, originDoc)', function () {
+
+    it('通过验证', function () {
+      let schema = define({
+        name: {
+          type: StringType,
+          validator: {
+            validate: function() {
+              return true;
+            },
+            message: 'fail'
+          }
+        }
+      });
+
+      let result = schema.validate(null, {name: 'daifee'});
+      expect(result).to.deep.equal(true);
+    });
+
+    it('不能为空', function () {
+      let schema = define({
+        name: {
+          type: StringType,
+          required: 'is required'
+        }
+      });
+
+      let err;
+
+      try {
+        schema.validate(null, {});
+      } catch (e) {
+        err = e;
+      }
+
+      expect(err).to.be.an.instanceof(Error);
+      expect(err.name).to.equal('ValidateError');
+      expect(err.errors['name']).to.be.an.instanceof(Error);
+      expect(err.errors['name'].message).to.equal('is required');
+    });
+
+    it('自定义验证器，不通过', function () {
+      let context = {};
+      let schema = define({
+        name: {
+          type: StringType,
+          validator: {
+            validate: function(value) {
+              expect(this).to.deep.equal(context);
+              return false;
+            },
+            message: 'fail'
+          }
+        }
+      });
+
+      let err;
+
+      try {
+        schema.validate(context, {name: 'daifee'});
+      } catch (e) {
+        err = e;
+      }
+
+      expect(err).to.be.an.instanceof(Error);
+      expect(err.name).to.equal('ValidateError');
+    });
+
+    it('只验证部分属性', function () {
+      let schema = define({
+        name: {
+          type: StringType,
+          required: 'is required'
+        },
+        gender: {
+          type: StringType,
+          required: 'is required'
+        }
+      });
+
+      let err;
+
+      try {
+        schema.validate(null, {}, ['gender']);
+      } catch (e) {
+        err = e;
+      }
+
+      expect(err.name).to.equal('ValidateError');
+      expect(err.errors['gender']).to.be.an.instanceof(Error);
+      // 没有执行验证
+      expect(err.errors['name']).to.deep.equal(undefined);
+    });
+  });
 });
 
