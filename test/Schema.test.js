@@ -41,7 +41,7 @@ describe('lib/Schema', function () {
 
     expect(schema.get(null, 'name', 'daifee')).to.equal('daifee');
     expect(schema.get(null, 'name', 28)).to.equal('28');
-    expect(schema.get(null, 'not-found', 28)).to.equal(28);
+    expect(schema.get(null, 'not-found', 28)).to.equal(undefined);
   });
 
   it('.get(context, attr, originalValue) 抛出异常', function () {
