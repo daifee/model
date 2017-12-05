@@ -4,7 +4,7 @@ import StringType from '../lib/types/String';
 import Model, {create} from '../lib/Model';
 
 
-describe.only('lib/Model', function () {
+describe('lib/Model', function () {
   it('创建一个Model类', function () {
     let User = create({});
 
