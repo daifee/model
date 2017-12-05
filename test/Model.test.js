@@ -49,7 +49,7 @@ describe('lib/Model', function () {
     expect(user.get('gender')).to.deep.equal(undefined);
   });
 
-  it.skip('#get(attr) 数据类型转换失败', function () {
+  it('#get(attr) 数据类型转换失败', function () {
     let schema = define({
       age: {
         type: NumberType
@@ -189,4 +189,20 @@ describe('lib/Model', function () {
       age: 27
     });
   });
+
+  it('#toJSON() 存在类型转换失败的属性，返回null', function () {
+    let schema = define({
+      age: {
+        type: NumberType
+      }
+    });
+    let User = create(schema);
+    let user = new User({
+      age: '张家泳'
+    });
+
+    expect(user.toJSON()).to.deep.equal(null);
+  });
+
+
 });
